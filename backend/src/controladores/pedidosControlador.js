@@ -16,6 +16,7 @@ import {
   estadoPedidoSegunTransaccion,
 } from '../servicios/wompiServicio.js';
 import * as Usuario from '../modelos/UsuarioModelo.js';
+import { entorno, transferenciaConfigurada } from '../config/entorno.js';
 
 /** POST /api/pedidos — crea el pedido y reserva el stock */
 export async function crear(req, res) {
@@ -71,6 +72,30 @@ export async function cambiarEstado(req, res) {
 /** GET /api/pagos/estado — qué pasarela hay y en qué modo */
 export async function estadoDePasarela(_req, res) {
   res.json(estadoPasarela());
+}
+
+/**
+ * GET /api/pagos/transferencia
+ * Datos de la cuenta para pagar por transferencia manual. No requiere
+ * ninguna pasarela ni aprobación de comercio: el pedido se crea normal
+ * (estado 'pendiente') y el administrador lo marca 'pagado' a mano cuando
+ * confirma el ingreso en su banco.
+ */
+export async function infoTransferencia(_req, res) {
+  if (!transferenciaConfigurada) {
+    return res.status(404).json({
+      error: 'No hay datos de cuenta configurados para transferencia bancaria',
+    });
+  }
+
+  return res.json({
+    disponible: true,
+    banco: entorno.transferencia.banco,
+    tipoCuenta: entorno.transferencia.tipoCuenta,
+    numeroCuenta: entorno.transferencia.numeroCuenta,
+    titular: entorno.transferencia.titular,
+    documentoTitular: entorno.transferencia.documentoTitular,
+  });
 }
 
 /**

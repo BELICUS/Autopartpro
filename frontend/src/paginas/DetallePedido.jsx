@@ -9,10 +9,19 @@ export default function DetallePedido() {
   const [parametros] = useSearchParams();
   const [pedido, setPedido] = useState(null);
   const [error, setError] = useState(null);
+  const [cuenta, setCuenta] = useState(null);
 
   useEffect(() => {
     api.get(`/pedidos/${id}`).then(setPedido).catch((e) => setError(e.message));
   }, [id]);
+
+  // Datos de la cuenta para transferir, solo si el pedido quedó pendiente
+  // de pago porque no hay pasarela en línea configurada.
+  useEffect(() => {
+    if (parametros.get('sinPasarela') === '1') {
+      api.get('/pagos/transferencia').then(setCuenta).catch(() => setCuenta(null));
+    }
+  }, [parametros]);
 
   if (error) {
     return (
@@ -31,10 +40,34 @@ export default function DetallePedido() {
       </div>
 
       {parametros.get('sinPasarela') === '1' && (
-        <div className="aviso aviso--alerta">
-          El pago en línea no está habilitado. Comunícate con nosotros para coordinar
-          la transferencia; el pedido queda reservado mientras tanto.
-        </div>
+        cuenta?.disponible ? (
+          <div className="aviso aviso--alerta pedido__transferencia">
+            <p>
+              <strong>Paga por transferencia bancaria.</strong> El pedido queda
+              reservado y lo confirmamos en cuanto veamos el ingreso.
+            </p>
+            <dl className="pedido__cuenta">
+              <div><dt>Banco</dt><dd>{cuenta.banco}</dd></div>
+              <div><dt>Tipo de cuenta</dt><dd>{cuenta.tipoCuenta}</dd></div>
+              <div><dt>Número de cuenta</dt><dd><strong>{cuenta.numeroCuenta}</strong></dd></div>
+              <div><dt>Titular</dt><dd>{cuenta.titular}</dd></div>
+              {cuenta.documentoTitular && (
+                <div><dt>Documento</dt><dd>{cuenta.documentoTitular}</dd></div>
+              )}
+              <div><dt>Valor a transferir</dt><dd><strong>{pesos(pedido.total)}</strong></dd></div>
+              <div><dt>Referencia</dt><dd>{pedido.numero}</dd></div>
+            </dl>
+            <p className="pedido__transferencia-nota">
+              Usa <strong>{pedido.numero}</strong> como concepto o descripción de la
+              transferencia para que podamos identificar tu pago.
+            </p>
+          </div>
+        ) : (
+          <div className="aviso aviso--alerta">
+            El pago en línea no está habilitado. Comunícate con nosotros para coordinar
+            la transferencia; el pedido queda reservado mientras tanto.
+          </div>
+        )
       )}
 
       <div className="pedido__cabecera tarjeta">

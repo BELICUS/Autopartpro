@@ -23,6 +23,7 @@ export default function Checkout() {
 
   const [envio, setEnvio] = useState({ direccion: '', ciudad: '', telefono: '' });
   const [pasarela, setPasarela] = useState(null);
+  const [transferencia, setTransferencia] = useState(null);
   const [error, setError] = useState(null);
   const [procesando, setProcesando] = useState(false);
 
@@ -39,6 +40,10 @@ export default function Checkout() {
 
   useEffect(() => {
     api.get('/pagos/estado').then(setPasarela).catch(() => setPasarela(null));
+    api
+      .get('/pagos/transferencia')
+      .then(setTransferencia)
+      .catch(() => setTransferencia(null));
   }, []);
 
   if (items.length === 0) {
@@ -121,11 +126,18 @@ export default function Checkout() {
     <div className="contenedor checkout">
       <h1>Finalizar compra</h1>
 
-      {pasarela && !pasarela.configurada && (
+      {pasarela && !pasarela.configurada && transferencia?.disponible && (
+        <div className="aviso aviso--info">
+          <strong>Pago por transferencia bancaria.</strong> Al confirmar verás los
+          datos de la cuenta para transferir. El pedido queda reservado y se confirma
+          en cuanto se verifica el ingreso.
+        </div>
+      )}
+
+      {pasarela && !pasarela.configurada && !transferencia?.disponible && (
         <div className="aviso aviso--alerta">
-          <strong>La pasarela de pagos no está configurada.</strong> Tu pedido se
-          registrará como pendiente y podrás pagarlo por transferencia. Para habilitar
-          el pago en línea hay que cargar las llaves de Wompi en el servidor.
+          <strong>Todavía no hay un método de pago habilitado.</strong> Tu pedido se
+          registrará como pendiente; comunícate con nosotros para coordinar el pago.
         </div>
       )}
 

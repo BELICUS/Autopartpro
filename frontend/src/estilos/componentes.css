@@ -574,3 +574,22 @@
   .rejilla-productos { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); }
   h1 { font-size: 1.5rem; }
 }
+
+/* ------------------------------------------------ datos de transferencia -- */
+.pedido__transferencia { padding: 1.1rem 1.2rem; }
+.pedido__cuenta {
+  margin: .9rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: .6rem 1.5rem;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-sm);
+  padding: .9rem 1rem;
+}
+.pedido__cuenta dt {
+  font-size: .72rem; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--grafito-500); font-weight: 700; margin: 0;
+}
+.pedido__cuenta dd { margin: .15rem 0 0; }
+.pedido__transferencia-nota { margin: 0; font-size: .85rem; }

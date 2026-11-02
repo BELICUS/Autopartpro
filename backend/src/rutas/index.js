@@ -148,6 +148,7 @@ router.patch(
 
 // ------------------------------------------------------------------ pagos ---
 router.get('/pagos/estado', asincrono(pedidos.estadoDePasarela));
+router.get('/pagos/transferencia', asincrono(pedidos.infoTransferencia));
 router.post('/pagos/iniciar/:pedidoId', requiereSesion, asincrono(pedidos.iniciarPago));
 router.get('/pagos/verificar', asincrono(pedidos.verificarPago));
 // Público y sin sesión: lo llama Wompi desde sus servidores.

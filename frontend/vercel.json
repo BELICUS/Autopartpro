@@ -8,11 +8,11 @@
     {
       "comment": "Las llamadas a la API se reenvían al backend, que vive fuera de Vercel. Así el navegador las ve como mismo origen y no hace falta CORS. Reemplaza API_HOST por el dominio real de tu backend.",
       "source": "/api/:ruta*",
-      "destination": "https://API_HOST/api/:ruta*"
+      "destination": "https://api.nunez.cloud/api/:ruta*"
     },
     {
       "source": "/imagenes/:archivo*",
-      "destination": "https://API_HOST/imagenes/:archivo*"
+      "destination": "https://api.nunez.cloud/imagenes/:archivo*"
     },
     {
       "comment": "React Router resuelve las rutas en el navegador: cualquier ruta desconocida debe devolver index.html, no un 404.",

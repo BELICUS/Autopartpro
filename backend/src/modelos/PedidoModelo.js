@@ -107,8 +107,8 @@ export async function crear(datos) {
     const [resultado] = await conexion.execute(
       `INSERT INTO pedidos
          (numero, usuario_id, estado, subtotal, iva, envio, total,
-          direccion_envio, ciudad, telefono)
-       VALUES (?, ?, 'pendiente', ?, ?, ?, ?, ?, ?, ?)`,
+          direccion_envio, ciudad, telefono, metodo_pago)
+       VALUES (?, ?, 'pendiente', ?, ?, ?, ?, ?, ?, ?, 'transferencia')`,
       [
         numero,
         datos.usuarioId,

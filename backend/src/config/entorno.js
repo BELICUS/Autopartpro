@@ -55,7 +55,24 @@ export const entorno = {
     secretoEventos: opcional('WOMPI_SECRETO_EVENTOS', ''),
     urlRedireccion: opcional('WOMPI_URL_REDIRECCION', 'http://localhost:5173/pago/resultado'),
   },
+
+  // Pago manual por transferencia bancaria. No depende de ninguna pasarela
+  // ni de aprobación de comercio: el cliente transfiere directo a esta
+  // cuenta desde su banco, y el pedido queda 'pendiente' hasta que el
+  // administrador confirma manualmente que el dinero llegó.
+  transferencia: {
+    banco: opcional('BANCO_NOMBRE', ''),
+    tipoCuenta: opcional('BANCO_TIPO_CUENTA', 'Ahorros'),
+    numeroCuenta: opcional('BANCO_NUMERO_CUENTA', ''),
+    titular: opcional('BANCO_TITULAR', ''),
+    documentoTitular: opcional('BANCO_DOCUMENTO_TITULAR', ''),
+  },
 };
+
+/** true si hay datos de cuenta cargados para mostrar en el checkout. */
+export const transferenciaConfigurada = Boolean(
+  entorno.transferencia.banco && entorno.transferencia.numeroCuenta,
+);
 
 /** true si la pasarela tiene llaves cargadas y puede usarse. */
 export const pasarelaConfigurada = Boolean(
