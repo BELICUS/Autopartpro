@@ -1,0 +1,35 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+
+  "rewrites": [
+    {
+      "comment": "Las llamadas a la API se reenvían al backend, que vive fuera de Vercel. Así el navegador las ve como mismo origen y no hace falta CORS. Reemplaza API_HOST por el dominio real de tu backend.",
+      "source": "/api/:ruta*",
+      "destination": "https://API_HOST/api/:ruta*"
+    },
+    {
+      "source": "/imagenes/:archivo*",
+      "destination": "https://API_HOST/imagenes/:archivo*"
+    },
+    {
+      "comment": "React Router resuelve las rutas en el navegador: cualquier ruta desconocida debe devolver index.html, no un 404.",
+      "source": "/:ruta*",
+      "destination": "/index.html"
+    }
+  ],
+
+  "headers": [
+    {
+      "source": "/assets/:archivo*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}

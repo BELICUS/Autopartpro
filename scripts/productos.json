@@ -1,0 +1,127 @@
+[
+  {
+    "sku": "ELE-ALT-002",
+    "nombre": "Alternador 90 A",
+    "categoria": "electrico"
+  },
+  {
+    "sku": "ELE-ARR-003",
+    "nombre": "Motor de arranque",
+    "categoria": "electrico"
+  },
+  {
+    "sku": "ELE-BAT-001",
+    "nombre": "Batería 12 V — 60 Ah",
+    "categoria": "electrico"
+  },
+  {
+    "sku": "ELE-BOM-004",
+    "nombre": "Bombillos H4 halógenos — par",
+    "categoria": "electrico"
+  },
+  {
+    "sku": "FIL-ACE-001",
+    "nombre": "Filtro de aceite roscado",
+    "categoria": "filtros"
+  },
+  {
+    "sku": "FIL-AIR-002",
+    "nombre": "Filtro de aire del motor",
+    "categoria": "filtros"
+  },
+  {
+    "sku": "FIL-CAB-003",
+    "nombre": "Filtro de cabina con carbón activado",
+    "categoria": "filtros"
+  },
+  {
+    "sku": "FIL-COM-004",
+    "nombre": "Filtro de combustible en línea",
+    "categoria": "filtros"
+  },
+  {
+    "sku": "FRE-BAN-003",
+    "nombre": "Bandas de freno traseras",
+    "categoria": "frenos"
+  },
+  {
+    "sku": "FRE-DIS-002",
+    "nombre": "Disco de freno ventilado 256 mm",
+    "categoria": "frenos"
+  },
+  {
+    "sku": "FRE-LIQ-004",
+    "nombre": "Líquido de frenos DOT 4 — 500 ml",
+    "categoria": "frenos"
+  },
+  {
+    "sku": "FRE-PAS-001",
+    "nombre": "Pastillas de freno delanteras cerámicas",
+    "categoria": "frenos"
+  },
+  {
+    "sku": "MOT-BOM-003",
+    "nombre": "Bomba de aceite",
+    "categoria": "motor"
+  },
+  {
+    "sku": "MOT-BUJ-001",
+    "nombre": "Bujías de iridio — juego x4",
+    "categoria": "motor"
+  },
+  {
+    "sku": "MOT-COR-002",
+    "nombre": "Correa de repartición dentada",
+    "categoria": "motor"
+  },
+  {
+    "sku": "MOT-EMP-004",
+    "nombre": "Empaque de culata multicapa",
+    "categoria": "motor"
+  },
+  {
+    "sku": "REF-BOM-003",
+    "nombre": "Bomba de agua",
+    "categoria": "refrigeracion"
+  },
+  {
+    "sku": "REF-RAD-001",
+    "nombre": "Radiador de aluminio",
+    "categoria": "refrigeracion"
+  },
+  {
+    "sku": "REF-TER-002",
+    "nombre": "Termostato con empaque",
+    "categoria": "refrigeracion"
+  },
+  {
+    "sku": "SUS-AMO-001",
+    "nombre": "Amortiguador delantero a gas",
+    "categoria": "suspension"
+  },
+  {
+    "sku": "SUS-BUJ-004",
+    "nombre": "Juego de bujes de tijera",
+    "categoria": "suspension"
+  },
+  {
+    "sku": "SUS-ESP-002",
+    "nombre": "Espiral de suspensión delantera",
+    "categoria": "suspension"
+  },
+  {
+    "sku": "SUS-ROT-003",
+    "nombre": "Rótula de suspensión inferior",
+    "categoria": "suspension"
+  },
+  {
+    "sku": "TRA-EMB-001",
+    "nombre": "Kit de embrague completo",
+    "categoria": "transmision"
+  },
+  {
+    "sku": "TRA-HOM-002",
+    "nombre": "Homocinética lado rueda",
+    "categoria": "transmision"
+  }
+]

@@ -1,0 +1,38 @@
+# ---------------------------------------------------------------------------
+# Unidad systemd para mantener la API corriendo en un VPS.
+#
+# Instalar en /etc/systemd/system/autopart-api.service y luego:
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now autopart-api
+#   sudo journalctl -u autopart-api -f     (para ver los registros)
+# ---------------------------------------------------------------------------
+
+[Unit]
+Description=AutoPart Pro API
+After=network.target
+
+[Service]
+Type=simple
+User=autopart
+WorkingDirectory=/var/www/autopart/backend
+ExecStart=/usr/bin/node src/servidor.js
+
+# Reiniciar si el proceso muere, con una pausa para no entrar en bucle.
+Restart=always
+RestartSec=5
+
+# El archivo .env vive fuera del repositorio, solo legible por el servicio.
+EnvironmentFile=/var/www/autopart/backend/.env
+
+# Endurecimiento básico: el proceso no necesita escribir en el sistema.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/www/autopart/backend/publico
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

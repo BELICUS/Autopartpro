@@ -1,0 +1,23 @@
+{
+  "name": "autopart-pro-api",
+  "version": "1.0.0",
+  "description": "API REST de AutoPart Pro — gestión de inventario y venta de repuestos automotrices",
+  "type": "module",
+  "main": "src/servidor.js",
+  "scripts": {
+    "dev": "node --watch src/servidor.js",
+    "start": "node src/servidor.js",
+    "bd:crear": "node src/utilidades/ejecutarSql.js sql/esquema.sql",
+    "bd:semilla": "node src/utilidades/ejecutarSql.js sql/semilla.sql",
+    "bd:reiniciar": "npm run bd:crear && npm run bd:semilla"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.11.5"
+  }
+}
