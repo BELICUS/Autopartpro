@@ -57,6 +57,12 @@ export const entorno = {
     secretoIntegridad: opcional('WOMPI_SECRETO_INTEGRIDAD', ''),
     secretoEventos: opcional('WOMPI_SECRETO_EVENTOS', ''),
     urlRedireccion: opcional('WOMPI_URL_REDIRECCION', 'http://localhost:5173/pago/resultado'),
+    // Override temporal SOLO para la prueba de pasarela en producción: si
+    // está presente, Wompi cobra este monto fijo en vez del total real del
+    // pedido, sin tocar lo que ve el cliente ni lo que queda guardado en la
+    // base de datos. Quitar esta variable de Railway en cuanto termine la
+    // prueba — mientras exista, CUALQUIER checkout cobra este monto.
+    montoPruebaPesos: Number(opcional('WOMPI_MONTO_PRUEBA_COP', 0)),
   },
 
   // Pago manual por transferencia bancaria. No depende de ninguna pasarela

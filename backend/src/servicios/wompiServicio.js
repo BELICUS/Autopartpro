@@ -103,7 +103,13 @@ export function prepararPago({ pedido, cliente }) {
     throw error;
   }
 
-  const montoCentavos = aCentavos(pedido.total);
+  // El monto real del pedido es el que se cobra, salvo que exista un
+  // override de prueba (ver entorno.js) para validar la pasarela con
+  // dinero real sin pagar el precio completo del catálogo.
+  const montoAFacturar = entorno.wompi.montoPruebaPesos > 0
+    ? entorno.wompi.montoPruebaPesos
+    : pedido.total;
+  const montoCentavos = aCentavos(montoAFacturar);
   const referencia = pedido.referencia_pago ?? generarReferencia(pedido.numero);
 
   return {
