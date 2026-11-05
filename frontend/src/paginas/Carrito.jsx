@@ -2,7 +2,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useCarrito } from '../contexto/CarritoContexto.jsx';
 import { useSesion } from '../contexto/SesionContexto.jsx';
-import { pesos } from '../servicios/formato.js';
+import { pesos, urlImagen } from '../servicios/formato.js';
 
 export default function Carrito() {
   const { items, cambiarCantidad, quitar, vaciar, resumen } = useCarrito();
@@ -43,7 +43,7 @@ export default function Carrito() {
                   <td>
                     <div className="carrito__producto">
                       {i.imagen && (
-                        <img src={`/imagenes/${i.imagen}`} alt="" width="52" height="52" />
+                        <img src={urlImagen(i.imagen)} alt="" width="52" height="52" />
                       )}
                       <div>
                         <Link to={`/producto/${i.id}`}>{i.nombre}</Link>

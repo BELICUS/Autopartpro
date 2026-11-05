@@ -1,3 +1,5 @@
+import { ORIGEN_BACKEND } from './api.js';
+
 /** Utilidades de formato para pesos colombianos y fechas. */
 
 const FORMATO_PESOS = new Intl.NumberFormat('es-CO', {
@@ -28,4 +30,14 @@ export function fecha(valor) {
 export function descuento(precio, precioOferta) {
   if (!precioOferta || precioOferta >= precio) return 0;
   return Math.round(((precio - precioOferta) / precio) * 100);
+}
+
+/**
+ * URL de una imagen de producto. En local, "/imagenes/archivo.png" basta
+ * porque el proxy de Vite la reenvía al backend. En producción el backend
+ * puede vivir en otro servicio (Railway, por ejemplo), así que se antepone
+ * su origen cuando VITE_API_URL está definida.
+ */
+export function urlImagen(nombre) {
+  return `${ORIGEN_BACKEND}/imagenes/${nombre}`;
 }

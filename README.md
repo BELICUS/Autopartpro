@@ -71,7 +71,8 @@ El paso a paso completo está en
 | [Diccionario de datos](docs/diccionario-de-datos.md) | Las 11 tablas columna por columna, restricciones y las decisiones de diseño detrás de cada una |
 | [Diagrama de clases](docs/diagrama-de-clases.md) | Modelo entidad-relación, capas del backend, componentes del frontend y diagramas de secuencia |
 | [Manual de despliegue](docs/manual-de-despliegue.md) | Instalación, configuración de la pasarela, producción y solución de problemas |
-| [Despliegue en nunez.cloud](docs/despliegue-nunez-cloud.md) | Guía paso a paso para tu VPS: Nginx, MariaDB, systemd, certificado y la prueba de pago real por transferencia |
+| [Despliegue en Railway](docs/despliegue-railway.md) | nunez.cloud sin servidor propio: Railway aloja backend, frontend y MySQL |
+| [Despliegue en nunez.cloud (VPS)](docs/despliegue-nunez-cloud.md) | Alternativa con servidor propio: Nginx, MariaDB, systemd |
 
 ---
 

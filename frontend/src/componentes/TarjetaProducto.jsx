@@ -1,6 +1,6 @@
 /** Tarjeta de producto del catálogo. */
 import { Link } from 'react-router-dom';
-import { pesos, descuento } from '../servicios/formato.js';
+import { pesos, descuento, urlImagen } from '../servicios/formato.js';
 import { useCarrito } from '../contexto/CarritoContexto.jsx';
 
 export default function TarjetaProducto({ producto }) {
@@ -14,7 +14,7 @@ export default function TarjetaProducto({ producto }) {
       <Link to={`/producto/${producto.id}`} className="producto__imagen">
         {producto.imagen ? (
           <img
-            src={`/imagenes/${producto.imagen}`}
+            src={urlImagen(producto.imagen)}
             alt={producto.nombre}
             loading="lazy"
             width="320"

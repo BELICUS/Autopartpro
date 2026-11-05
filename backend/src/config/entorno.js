@@ -29,7 +29,10 @@ function opcional(nombre, porDefecto) {
 }
 
 export const entorno = {
-  puerto: Number(opcional('PUERTO', 4000)),
+  // Railway (y la mayoría de plataformas) asignan el puerto por la
+  // variable PORT, no elegible por el usuario. PUERTO sigue funcionando
+  // para desarrollo local y despliegues manuales (VPS propio).
+  puerto: Number(opcional('PORT', opcional('PUERTO', 4000))),
   origenFrontend: opcional('ORIGEN_FRONTEND', 'http://localhost:5173'),
 
   bd: {

@@ -6,7 +6,21 @@
  * excepción con un mensaje legible.
  */
 
-const BASE = '/api';
+/**
+ * En desarrollo, el proxy de Vite reenvía /api al backend en el mismo
+ * origen (ver vite.config.js), así que basta con la ruta relativa.
+ *
+ * En producción el frontend y el backend suelen vivir en servicios
+ * separados (p. ej. Railway asigna una URL distinta a cada uno), así que
+ * hace falta la URL completa. Se fija al compilar con la variable de
+ * entorno VITE_API_URL — Vite solo expone al navegador las variables que
+ * empiezan con VITE_.
+ */
+const BASE = import.meta.env.VITE_API_URL || '/api';
+
+/** Origen del backend, sin el sufijo /api — para construir URLs de imágenes. */
+export const ORIGEN_BACKEND = BASE.replace(/\/api\/?$/, '');
+
 const CLAVE_TOKEN = 'autopart_token';
 
 export function guardarToken(token) {

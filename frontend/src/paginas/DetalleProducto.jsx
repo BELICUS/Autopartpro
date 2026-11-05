@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { api } from '../servicios/api.js';
-import { pesos, descuento } from '../servicios/formato.js';
+import { pesos, descuento, urlImagen } from '../servicios/formato.js';
 import { useCarrito } from '../contexto/CarritoContexto.jsx';
 
 export default function DetalleProducto() {
@@ -56,7 +56,7 @@ export default function DetalleProducto() {
       <div className="detalle__principal">
         <div className="detalle__imagen">
           {producto.imagen ? (
-            <img src={`/imagenes/${producto.imagen}`} alt={producto.nombre} width="520" height="520" />
+            <img src={urlImagen(producto.imagen)} alt={producto.nombre} width="520" height="520" />
           ) : (
             <div className="producto__sinimagen" aria-hidden="true" />
           )}
