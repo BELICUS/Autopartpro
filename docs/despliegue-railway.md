@@ -1,4 +1,4 @@
-# Despliegue en Railway con el dominio nunez.cloud
+# Despliegue en Railway con el dominio autopartpro.online
 
 Sin servidor propio: Railway aloja el backend, el frontend y la base de
 datos MySQL, cada uno como un servicio separado dentro de un mismo
@@ -15,7 +15,7 @@ crearlas en tu nombre.
 
 - [ ] Cuenta en `https://railway.app` (puedes entrar con GitHub directamente)
 - [ ] Cuenta en `https://github.com` con el proyecto subido como repositorio
-- [ ] Acceso al panel de DNS de Hostinger donde administras `nunez.cloud`
+- [ ] Acceso al panel de DNS de Hostinger donde administras `autopartpro.online`
 
 ### Subir el proyecto a GitHub
 
@@ -91,11 +91,11 @@ WOMPI_LLAVE_PUBLICA=pub_prod_...
 WOMPI_LLAVE_PRIVADA=prv_prod_...
 WOMPI_SECRETO_INTEGRIDAD=prod_integrity_...
 WOMPI_SECRETO_EVENTOS=prod_events_...
-WOMPI_URL_REDIRECCION=https://nunez.cloud/pago/resultado
+WOMPI_URL_REDIRECCION=https://autopartpro.online/pago/resultado
 
 # El origen del frontend — lo actualizas en el paso 6 una vez
 # sepas la URL real que Railway le asignó.
-ORIGEN_FRONTEND=https://nunez.cloud
+ORIGEN_FRONTEND=https://autopartpro.online
 ```
 
 > `PORT` no hay que definirlo — Railway lo inyecta solo, y el código ya lo
@@ -183,12 +183,12 @@ Si las imágenes no cargan, revisa que `VITE_API_URL` tenga el sufijo
 
 ---
 
-## 6. Apuntar nunez.cloud
+## 6. Apuntar autopartpro.online
 
-### En el panel de Hostinger (DNS de nunez.cloud)
+### En el panel de Hostinger (DNS de autopartpro.online)
 
 1. En el servicio del **frontend**, Railway → **Settings → Networking →
-   Custom Domain** → escribe `nunez.cloud` (o `www.nunez.cloud`).
+   Custom Domain** → escribe `autopartpro.online` (o `www.autopartpro.online`).
    Railway te da un registro **CNAME** para apuntar.
 2. En hPanel de Hostinger → tu dominio → **DNS / Nameservers**, agrega:
 
@@ -196,30 +196,30 @@ Si las imágenes no cargan, revisa que `VITE_API_URL` tenga el sufijo
    |---|---|---|
    | CNAME | `@` o `www` | el que te dio Railway |
 
-   (Si Hostinger no permite CNAME en `@`, usa `www.nunez.cloud` como
-   dominio principal y agrega una redirección de `nunez.cloud` a
-   `www.nunez.cloud` desde el mismo panel.)
+   (Si Hostinger no permite CNAME en `@`, usa `www.autopartpro.online` como
+   dominio principal y agrega una redirección de `autopartpro.online` a
+   `www.autopartpro.online` desde el mismo panel.)
 
 3. Railway emite el certificado HTTPS solo, en cuanto detecta el DNS
    propagado — puede tardar de minutos a un par de horas.
 
 4. Repite lo mismo para el backend si quieres un subdominio propio, por
-   ejemplo `api.nunez.cloud` apuntando con CNAME al dominio de Railway del
+   ejemplo `api.autopartpro.online` apuntando con CNAME al dominio de Railway del
    backend.
 
 ### Actualizar las variables con el dominio final
 
-Una vez `nunez.cloud` y (si lo creaste) `api.nunez.cloud` respondan:
+Una vez `autopartpro.online` y (si lo creaste) `api.autopartpro.online` respondan:
 
 **Backend** → Variables:
 ```bash
-ORIGEN_FRONTEND=https://nunez.cloud
-WOMPI_URL_REDIRECCION=https://nunez.cloud/pago/resultado
+ORIGEN_FRONTEND=https://autopartpro.online
+WOMPI_URL_REDIRECCION=https://autopartpro.online/pago/resultado
 ```
 
 **Frontend** → Variables:
 ```bash
-VITE_API_URL=https://api.nunez.cloud/api
+VITE_API_URL=https://api.autopartpro.online/api
 ```
 
 Railway vuelve a desplegar cada servicio automáticamente al guardar.
@@ -230,7 +230,7 @@ Ahora que el backend tiene una URL pública real (ya no `localhost` ni un
 túnel temporal), registra en el panel de Wompi:
 
 ```
-https://api.nunez.cloud/api/pagos/webhook
+https://api.autopartpro.online/api/pagos/webhook
 ```
 
 Con esto la confirmación de pago deja de depender de que el comprador
@@ -241,9 +241,9 @@ vuelva por la redirección — Wompi avisa directo al backend.
 ## 7. Comprobación final
 
 ```bash
-curl https://nunez.cloud
-curl https://api.nunez.cloud/api/salud
-curl https://api.nunez.cloud/api/pagos/estado
+curl https://autopartpro.online
+curl https://api.autopartpro.online/api/salud
+curl https://api.autopartpro.online/api/pagos/estado
 ```
 
 Y en el navegador: cuenta → catálogo → carrito → checkout → pago real con
