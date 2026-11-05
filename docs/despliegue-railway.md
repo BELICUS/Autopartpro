@@ -1,4 +1,4 @@
-# Despliegue en Railway con el dominio autopartpro.online
+# Despliegue en Railway con el dominio aurtopartpro.online
 
 Sin servidor propio: Railway aloja el backend, el frontend y la base de
 datos MySQL, cada uno como un servicio separado dentro de un mismo
@@ -15,7 +15,7 @@ crearlas en tu nombre.
 
 - [ ] Cuenta en `https://railway.app` (puedes entrar con GitHub directamente)
 - [ ] Cuenta en `https://github.com` con el proyecto subido como repositorio
-- [ ] Acceso al panel de DNS de Hostinger donde administras `autopartpro.online`
+- [ ] Acceso al panel de DNS de Hostinger donde administras `aurtopartpro.online`
 
 ### Subir el proyecto a GitHub
 
@@ -91,11 +91,11 @@ WOMPI_LLAVE_PUBLICA=pub_prod_...
 WOMPI_LLAVE_PRIVADA=prv_prod_...
 WOMPI_SECRETO_INTEGRIDAD=prod_integrity_...
 WOMPI_SECRETO_EVENTOS=prod_events_...
-WOMPI_URL_REDIRECCION=https://autopartpro.online/pago/resultado
+WOMPI_URL_REDIRECCION=https://aurtopartpro.online/pago/resultado
 
 # El origen del frontend — lo actualizas en el paso 6 una vez
 # sepas la URL real que Railway le asignó.
-ORIGEN_FRONTEND=https://autopartpro.online
+ORIGEN_FRONTEND=https://aurtopartpro.online
 ```
 
 > `PORT` no hay que definirlo — Railway lo inyecta solo, y el código ya lo
@@ -183,12 +183,12 @@ Si las imágenes no cargan, revisa que `VITE_API_URL` tenga el sufijo
 
 ---
 
-## 6. Apuntar autopartpro.online
+## 6. Apuntar aurtopartpro.online
 
-### En el panel de Hostinger (DNS de autopartpro.online)
+### En el panel de Hostinger (DNS de aurtopartpro.online)
 
 1. En el servicio del **frontend**, Railway → **Settings → Networking →
-   Custom Domain** → escribe `autopartpro.online` (o `www.autopartpro.online`).
+   Custom Domain** → escribe `aurtopartpro.online` (o `www.aurtopartpro.online`).
    Railway te da un registro **CNAME** para apuntar.
 2. En hPanel de Hostinger → tu dominio → **DNS / Nameservers**, agrega:
 
@@ -196,30 +196,30 @@ Si las imágenes no cargan, revisa que `VITE_API_URL` tenga el sufijo
    |---|---|---|
    | CNAME | `@` o `www` | el que te dio Railway |
 
-   (Si Hostinger no permite CNAME en `@`, usa `www.autopartpro.online` como
-   dominio principal y agrega una redirección de `autopartpro.online` a
-   `www.autopartpro.online` desde el mismo panel.)
+   (Si Hostinger no permite CNAME en `@`, usa `www.aurtopartpro.online` como
+   dominio principal y agrega una redirección de `aurtopartpro.online` a
+   `www.aurtopartpro.online` desde el mismo panel.)
 
 3. Railway emite el certificado HTTPS solo, en cuanto detecta el DNS
    propagado — puede tardar de minutos a un par de horas.
 
 4. Repite lo mismo para el backend si quieres un subdominio propio, por
-   ejemplo `api.autopartpro.online` apuntando con CNAME al dominio de Railway del
+   ejemplo `api.aurtopartpro.online` apuntando con CNAME al dominio de Railway del
    backend.
 
 ### Actualizar las variables con el dominio final
 
-Una vez `autopartpro.online` y (si lo creaste) `api.autopartpro.online` respondan:
+Una vez `aurtopartpro.online` y (si lo creaste) `api.aurtopartpro.online` respondan:
 
 **Backend** → Variables:
 ```bash
-ORIGEN_FRONTEND=https://autopartpro.online
-WOMPI_URL_REDIRECCION=https://autopartpro.online/pago/resultado
+ORIGEN_FRONTEND=https://aurtopartpro.online
+WOMPI_URL_REDIRECCION=https://aurtopartpro.online/pago/resultado
 ```
 
 **Frontend** → Variables:
 ```bash
-VITE_API_URL=https://api.autopartpro.online/api
+VITE_API_URL=https://api.aurtopartpro.online/api
 ```
 
 Railway vuelve a desplegar cada servicio automáticamente al guardar.
@@ -230,7 +230,7 @@ Ahora que el backend tiene una URL pública real (ya no `localhost` ni un
 túnel temporal), registra en el panel de Wompi:
 
 ```
-https://api.autopartpro.online/api/pagos/webhook
+https://api.aurtopartpro.online/api/pagos/webhook
 ```
 
 Con esto la confirmación de pago deja de depender de que el comprador
@@ -241,9 +241,9 @@ vuelva por la redirección — Wompi avisa directo al backend.
 ## 7. Comprobación final
 
 ```bash
-curl https://autopartpro.online
-curl https://api.autopartpro.online/api/salud
-curl https://api.autopartpro.online/api/pagos/estado
+curl https://aurtopartpro.online
+curl https://api.aurtopartpro.online/api/salud
+curl https://api.aurtopartpro.online/api/pagos/estado
 ```
 
 Y en el navegador: cuenta → catálogo → carrito → checkout → pago real con

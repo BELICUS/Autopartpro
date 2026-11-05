@@ -22,6 +22,6 @@ export default defineConfig({
     // sirve el frontend compilado en Railway. Sin esto, Railway asigna un
     // dominio *.up.railway.app que Vite rechazaría por defecto.
     host: '0.0.0.0',
-    allowedHosts: ['.up.railway.app', '.railway.app', 'autopartpro.online', '.autopartpro.online'],
+    allowedHosts: ['.up.railway.app', '.railway.app', 'aurtopartpro.online', '.aurtopartpro.online'],
   },
 });

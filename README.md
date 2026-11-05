@@ -71,7 +71,7 @@ El paso a paso completo está en
 | [Diccionario de datos](docs/diccionario-de-datos.md) | Las 11 tablas columna por columna, restricciones y las decisiones de diseño detrás de cada una |
 | [Diagrama de clases](docs/diagrama-de-clases.md) | Modelo entidad-relación, capas del backend, componentes del frontend y diagramas de secuencia |
 | [Manual de despliegue](docs/manual-de-despliegue.md) | Instalación, configuración de la pasarela, producción y solución de problemas |
-| [Despliegue en Railway](docs/despliegue-railway.md) | autopartpro.online sin servidor propio: Railway aloja backend, frontend y MySQL |
+| [Despliegue en Railway](docs/despliegue-railway.md) | aurtopartpro.online sin servidor propio: Railway aloja backend, frontend y MySQL |
 | [Despliegue con servidor propio (VPS)](docs/despliegue-nunez-cloud.md) | Alternativa con servidor propio: Nginx, MariaDB, systemd (guía de ejemplo, no en uso) |
 
 ---
