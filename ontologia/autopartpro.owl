@@ -1,0 +1,853 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/autopartpro/ontologia#"
+     xml:base="http://www.semanticweb.org/autopartpro/ontologia"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/autopartpro/ontologia">
+        <rdfs:comment>Ontología del dominio de repuestos automotrices y su compatibilidad con generaciones de vehículo. Proyecto final de Ingeniería Web — Universidad Cooperativa de Colombia. Autores: Dylan Nuñez, Jose Gomez e Ivan Orozco.</rdfs:comment>
+        <rdfs:comment>Preguntas de competencia: (1) ¿Qué repuestos sirven para un Chevrolet Spark GT del año 2013? (2) ¿Qué repuestos están en nivel crítico y deben reponerse? (3) Si un repuesto está agotado, ¿qué equivalente se le puede ofrecer al cliente?</rdfs:comment>
+        <rdfs:label>Ontología AutoPart Pro</rdfs:label>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#aceptaRepuesto -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#aceptaRepuesto">
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#esCompatibleCon"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Vehiculo"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:comment>Inversa de esCompatibleCon. No se declara a mano para cada vehículo: la deduce el razonador.</rdfs:comment>
+        <rdfs:label>acepta repuesto</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#afectaRepuesto -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#afectaRepuesto">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#MovimientoInventario"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:label>afecta repuesto</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#equivaleA -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#equivaleA">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:comment>Dos repuestos de distinta marca que cumplen la misma función y el mismo ajuste.</rdfs:comment>
+        <rdfs:label>equivale a</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#esCompatibleCon -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#esCompatibleCon">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Vehiculo"/>
+        <rdfs:comment>Relaciona un repuesto con la generación de vehículo en la que se puede montar.</rdfs:comment>
+        <rdfs:label>es compatible con</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#fabricadoPor -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#fabricadoPor">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Fabricante"/>
+        <rdfs:label>fabricado por</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#incluyeRepuesto -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#incluyeRepuesto">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Pedido"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:label>incluye repuesto</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#perteneceACategoria -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#perteneceACategoria">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#CategoriaRepuesto"/>
+        <rdfs:label>pertenece a categoría</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#poseeVehiculo -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#poseeVehiculo">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Cliente"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Vehiculo"/>
+        <rdfs:label>posee vehículo</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#realizaPedido -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#realizaPedido">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Cliente"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Pedido"/>
+        <rdfs:label>realiza pedido</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#registraMovimiento -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#registraMovimiento">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Usuario"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#MovimientoInventario"/>
+        <rdfs:label>registra movimiento</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#seInstalaCon -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#seInstalaCon">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:comment>Repuestos que conviene cambiar en la misma intervención.</rdfs:comment>
+        <rdfs:label>se instala con</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#sustituyeA -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#sustituyeA">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:comment>Referencia nueva que reemplaza a una descontinuada. Es transitiva: si B sustituye a A y C sustituye a B, entonces C sustituye a A.</rdfs:comment>
+        <rdfs:label>sustituye a</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#tieneMarca -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#tieneMarca">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#ModeloVehiculo"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#MarcaVehiculo"/>
+        <rdfs:label>tiene marca</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#tieneModelo -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#tieneModelo">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Vehiculo"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#ModeloVehiculo"/>
+        <rdfs:label>tiene modelo</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#anioFin -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#anioFin">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Vehiculo"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:label>año fin</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#anioInicio -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#anioInicio">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Vehiculo"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:label>año inicio</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#motor -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#motor">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Vehiculo"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>motor</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#precio -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#precio">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <rdfs:label>precio</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#sku -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#sku">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>sku</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#stock -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#stock">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:label>stock</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#stockMinimo -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/autopartpro/ontologia#stockMinimo">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:label>stock mínimo</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Administrador -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Administrador">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Usuario"/>
+        <rdfs:label>Administrador</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Asesor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Asesor">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Usuario"/>
+        <rdfs:label>Asesor de mostrador</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#CategoriaRepuesto -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#CategoriaRepuesto">
+        <rdfs:comment>Sistema del vehículo al que pertenece el repuesto: frenos, filtros, motor.</rdfs:comment>
+        <rdfs:label>Categoría de repuesto</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Cliente -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Cliente">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Usuario"/>
+        <rdfs:label>Cliente</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Fabricante -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Fabricante">
+        <rdfs:label>Fabricante</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#MarcaVehiculo -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#MarcaVehiculo">
+        <rdfs:comment>Chevrolet, Renault, Mazda. No confundir con el fabricante del repuesto.</rdfs:comment>
+        <rdfs:label>Marca de vehículo</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#ModeloVehiculo -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#ModeloVehiculo">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#tieneMarca"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#MarcaVehiculo"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Modelo de vehículo</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#MovimientoInventario -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#MovimientoInventario">
+        <rdfs:label>Movimiento de inventario</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Pedido -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Pedido">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#incluyeRepuesto"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Pedido</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Repuesto -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Repuesto">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#perteneceACategoria"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#CategoriaRepuesto"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Repuesto</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#RepuestoCritico -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#RepuestoCritico">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#stock"/>
+                        <owl:someValuesFrom>
+                            <rdfs:Datatype>
+                                <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+                                <owl:withRestrictions rdf:parseType="Collection">
+                                    <rdf:Description>
+                                        <xsd:maxInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#int">3</xsd:maxInclusive>
+                                    </rdf:Description>
+                                </owl:withRestrictions>
+                            </rdfs:Datatype>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:comment>Clase definida. El razonador clasifica aquí todo repuesto cuyo stock sea menor o igual a 3, sin que nadie lo marque a mano.</rdfs:comment>
+        <rdfs:label>Repuesto crítico</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#RepuestoDeFiltracion -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#RepuestoDeFiltracion">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:label>Repuesto de filtración</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#RepuestoDeFrenos -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#RepuestoDeFrenos">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:label>Repuesto de frenos</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#RepuestoDeMotor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#RepuestoDeMotor">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <rdfs:label>Repuesto de motor</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#RepuestoUniversal -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#RepuestoUniversal">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#esCompatibleCon"/>
+                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">4</owl:minQualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Vehiculo"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:comment>Clase definida. Repuesto compatible con cuatro o más generaciones distintas de vehículo.</rdfs:comment>
+        <rdfs:label>Repuesto universal</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Usuario -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Usuario">
+        <rdfs:label>Usuario</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Vehiculo -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Vehiculo">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#tieneModelo"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#ModeloVehiculo"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>No es un carro individual sino una generación: modelo, rango de años y motorización.</rdfs:comment>
+        <rdfs:label>Vehículo</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#VehiculoDiesel -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#VehiculoDiesel">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Vehiculo"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#VehiculoGasolina"/>
+        <rdfs:label>Vehículo diésel</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#VehiculoGasolina -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/autopartpro/ontologia#VehiculoGasolina">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Vehiculo"/>
+        <rdfs:label>Vehículo a gasolina</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Bosch -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Bosch">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Fabricante"/>
+        <rdfs:label>Bosch</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Chevrolet -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Chevrolet">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#MarcaVehiculo"/>
+        <rdfs:label>Chevrolet</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#FIL_ACE_001 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#FIL_ACE_001">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#RepuestoDeFiltracion"/>
+        <esCompatibleCon rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Sail_2013_2019"/>
+        <esCompatibleCon rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#SparkGT_2011_2017"/>
+        <fabricadoPor rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Bosch"/>
+        <perteneceACategoria rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Filtros"/>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">24000</precio>
+        <sku>FIL-ACE-001</sku>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#int">85</stock>
+        <stockMinimo rdf:datatype="http://www.w3.org/2001/XMLSchema#int">20</stockMinimo>
+        <rdfs:label>Filtro de aceite roscado</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#FRE_DIS_002 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#FRE_DIS_002">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#RepuestoDeFrenos"/>
+        <esCompatibleCon rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#SparkGT_2011_2017"/>
+        <fabricadoPor rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#TRW"/>
+        <perteneceACategoria rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Frenos"/>
+        <seInstalaCon rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#FRE_PAS_001"/>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">142000</precio>
+        <sku>FRE-DIS-002</sku>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#int">8</stock>
+        <stockMinimo rdf:datatype="http://www.w3.org/2001/XMLSchema#int">10</stockMinimo>
+        <rdfs:label>Disco de freno ventilado 256 mm</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#FRE_PAS_001 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#FRE_PAS_001">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#RepuestoDeFrenos"/>
+        <esCompatibleCon rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Logan_2010_2016"/>
+        <esCompatibleCon rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Sail_2013_2019"/>
+        <esCompatibleCon rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Sandero_2012_2019"/>
+        <esCompatibleCon rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#SparkGT_2011_2017"/>
+        <fabricadoPor rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Bosch"/>
+        <perteneceACategoria rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Frenos"/>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">159000</precio>
+        <sku>FRE-PAS-001</sku>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#int">42</stock>
+        <stockMinimo rdf:datatype="http://www.w3.org/2001/XMLSchema#int">10</stockMinimo>
+        <rdfs:label>Pastillas de freno delanteras cerámicas</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Filtros -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Filtros">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#CategoriaRepuesto"/>
+        <rdfs:label>Filtros</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Frenos -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Frenos">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#CategoriaRepuesto"/>
+        <rdfs:label>Frenos</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Logan -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Logan">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#ModeloVehiculo"/>
+        <tieneMarca rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Renault"/>
+        <rdfs:label>Logan</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Logan_2010_2016 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Logan_2010_2016">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#VehiculoGasolina"/>
+        <tieneModelo rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Logan"/>
+        <anioFin rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2016</anioFin>
+        <anioInicio rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2010</anioInicio>
+        <motor>1.6L</motor>
+        <rdfs:label>Logan 2010-2016 1.6L</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#MOV_001 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#MOV_001">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#MovimientoInventario"/>
+        <afectaRepuesto rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#FRE_DIS_002"/>
+        <rdfs:label>Salida por pedido APP-2026-00014</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#PED_2026_00014 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#PED_2026_00014">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Pedido"/>
+        <incluyeRepuesto rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#FRE_DIS_002"/>
+        <incluyeRepuesto rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#FRE_PAS_001"/>
+        <rdfs:label>Pedido APP-2026-00014</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Renault -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Renault">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#MarcaVehiculo"/>
+        <rdfs:label>Renault</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#SUS_AMO_001 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#SUS_AMO_001">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Repuesto"/>
+        <esCompatibleCon rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Logan_2010_2016"/>
+        <fabricadoPor rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Bosch"/>
+        <perteneceACategoria rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Suspension"/>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">210000</precio>
+        <sku>SUS-AMO-001</sku>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</stock>
+        <stockMinimo rdf:datatype="http://www.w3.org/2001/XMLSchema#int">6</stockMinimo>
+        <rdfs:label>Amortiguador delantero a gas</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Sail -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Sail">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#ModeloVehiculo"/>
+        <tieneMarca rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Chevrolet"/>
+        <rdfs:label>Sail</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Sail_2013_2019 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Sail_2013_2019">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#VehiculoGasolina"/>
+        <tieneModelo rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Sail"/>
+        <anioFin rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2019</anioFin>
+        <anioInicio rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2013</anioInicio>
+        <motor>1.4L</motor>
+        <rdfs:label>Sail 2013-2019 1.4L</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Sandero -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Sandero">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#ModeloVehiculo"/>
+        <tieneMarca rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Renault"/>
+        <rdfs:label>Sandero</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Sandero_2012_2019 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Sandero_2012_2019">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#VehiculoGasolina"/>
+        <tieneModelo rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Sandero"/>
+        <anioFin rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2019</anioFin>
+        <anioInicio rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2012</anioInicio>
+        <motor>1.6L</motor>
+        <rdfs:label>Sandero 2012-2019 1.6L</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#SparkGT -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#SparkGT">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#ModeloVehiculo"/>
+        <tieneMarca rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Chevrolet"/>
+        <rdfs:label>Spark GT</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#SparkGT_2011_2017 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#SparkGT_2011_2017">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#VehiculoGasolina"/>
+        <tieneModelo rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#SparkGT"/>
+        <anioFin rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2017</anioFin>
+        <anioInicio rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2011</anioInicio>
+        <motor>1.2L</motor>
+        <rdfs:label>Spark GT 2011-2017 1.2L</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#Suspension -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Suspension">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#CategoriaRepuesto"/>
+        <rdfs:label>Suspensión</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#TRW -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#TRW">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Fabricante"/>
+        <rdfs:label>TRW</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#TRW_PAS_010 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#TRW_PAS_010">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#RepuestoDeFrenos"/>
+        <equivaleA rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#FRE_PAS_001"/>
+        <esCompatibleCon rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#SparkGT_2011_2017"/>
+        <fabricadoPor rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#TRW"/>
+        <perteneceACategoria rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Frenos"/>
+        <precio rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">148000</precio>
+        <sku>TRW-PAS-010</sku>
+        <stock rdf:datatype="http://www.w3.org/2001/XMLSchema#int">17</stock>
+        <stockMinimo rdf:datatype="http://www.w3.org/2001/XMLSchema#int">6</stockMinimo>
+        <rdfs:label>Pastillas de freno cerámicas TRW</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#dylan -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#dylan">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Cliente"/>
+        <poseeVehiculo rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#SparkGT_2011_2017"/>
+        <realizaPedido rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#PED_2026_00014"/>
+        <rdfs:label>Dylan Nuñez</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#ivan -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#ivan">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Asesor"/>
+        <registraMovimiento rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#MOV_001"/>
+        <rdfs:label>Ivan Orozco</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/autopartpro/ontologia#jose -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/autopartpro/ontologia#jose">
+        <rdf:type rdf:resource="http://www.semanticweb.org/autopartpro/ontologia#Administrador"/>
+        <rdfs:label>Jose Gomez</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Administrador"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Asesor"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Cliente"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Bosch"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Chevrolet"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#FIL_ACE_001"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#FRE_DIS_002"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#FRE_PAS_001"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Filtros"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Frenos"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Logan"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Logan_2010_2016"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Renault"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#SUS_AMO_001"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Sail"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Sail_2013_2019"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Sandero"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Sandero_2012_2019"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#SparkGT"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#SparkGT_2011_2017"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#Suspension"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#TRW"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#TRW_PAS_010"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#dylan"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#ivan"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/autopartpro/ontologia#jose"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
